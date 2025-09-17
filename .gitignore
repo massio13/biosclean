@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Build / IDE
+dist/
+build/
+*.spec
+.vscode/
+.idea/
+
+# Logs & temp
+*.log
+*.tmp
+
+# BIOS dumps (ne pas push par sécurité)
+*.bin
+*.rom
+*.cap
+*.fd
+*.dump
+*.vol
+*.efi
+*.zip
+*.7z
+*.rar

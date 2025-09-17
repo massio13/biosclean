@@ -1,0 +1,26 @@
+name: Release build and package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain-action@stable
+      - name: Build release
+        run: cargo build --release
+      - name: Build GUI exe
+        run: |
+          python -m pip install --upgrade pip
+          pip install PySide6 pyinstaller
+          cd python_gui
+          pyinstaller --noconfirm --onefile --add-data "..\\target\\release\\bios_scanner_full_extended.exe;." gui.py
+      - name: Create release artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/release/bios_scanner_full_extended.exe
+            python_gui/dist/gui.exe
